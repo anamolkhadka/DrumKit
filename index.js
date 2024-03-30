@@ -4,12 +4,29 @@ const buttons = document.querySelectorAll('.drum')
 ///Add event listener to each buttons
 buttons.forEach(button => {
     button.addEventListener('click',function () {
-        console.log(this.innerHTML);
+        //console.log(this.innerHTML);
         button_name = this.innerHTML;
-        let audio;
-        
-        //Switch statement to play the sound based on the button clicked.
-        switch(button_name){
+        makeSound(button_name);
+        buttonanimation(button_name);
+    });
+});
+
+///Adding event listener for keypress event in the document object.
+///Event is the keypress event.
+document.addEventListener('keypress',function (event){
+    ///console.log(event.key)
+    key_pressed = event.key;
+    makeSound(key_pressed);
+    buttonanimation(key_pressed);
+
+})
+
+
+function makeSound(key) {
+    key_pressed = key;
+    let audio;
+    //Switch statement to play the sound based on the key pressed.
+    switch(key_pressed){
         case 'w':
             audio = new Audio('sounds/tom-1.mp3');
             audio.play();
@@ -42,6 +59,17 @@ buttons.forEach(button => {
             // Do nothing
 
         }
-    });
-});
+};
 
+///Adding flash Animation for the buttons that gets clicked
+function buttonanimation(currentKey) {
+
+    var activeButton = document.querySelector('.'+ currentKey);
+    ///classlist.add will add css class pressed to the button when clicked.
+    activeButton.classList.add('pressed');
+    ///settimeout function to remove the effect.
+    setTimeout(function() {
+        activeButton.classList.remove('pressed');
+    },100)
+    
+}
