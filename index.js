@@ -1,6 +1,5 @@
 /// Select all buttons with the class "dum"
 const buttons = document.querySelectorAll('.drum')
-
 ///Add event listener to each buttons
 buttons.forEach(button => {
     button.addEventListener('click',function () {
